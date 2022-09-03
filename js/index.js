@@ -1,3 +1,5 @@
+
+document.getElementById('loader').style.display = 'none'
 const loadNewsCategory = () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
     fetch(url)
@@ -20,6 +22,7 @@ const displayCategory = categories =>{
 
 
 const loadCategoryDetails = async(category_id) => {
+    document.getElementById('loader').style.display = 'block';
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     const response = await fetch(url);
     const data = await response.json();
@@ -28,8 +31,20 @@ const loadCategoryDetails = async(category_id) => {
 
 const displayNewsFeed = newsFeed => {
     // console.log(newsFeed)
+    document.getElementById('loader').style.display = 'none'
     const textField = document.getElementById('text-field')
-    textField.value = ("Number of news is", + newsFeed.length);
+
+    if (newsFeed.length != 0) {
+        textField.innerHTML = `
+        <p>${newsFeed.length} Number of news</p>
+        `;
+
+    }
+    else {
+        textField.innerText = 'There is No news'
+
+    }
+
     const newsContainer = document.getElementById('news-container')
     newsContainer.innerHTML = "";
     newsFeed.forEach(news => {
