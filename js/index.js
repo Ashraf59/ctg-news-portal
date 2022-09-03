@@ -49,7 +49,7 @@ const displayNewsFeed = newsFeed => {
                     <div class="d-flex justify-content-around  mt-5">
                         <div><img src="${thumbnail_url}" class="img-fluid w-25 h-25 rounded-circle" alt="..."> </div>
                         <div>${total_view ? total_view : 'No views'}</div>
-                        <div><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Details</button></div>
+                        <div><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Details</button></div>
                     </div>
                 </div>
             </div>
@@ -59,6 +59,31 @@ const displayNewsFeed = newsFeed => {
     })
 }
 
+//showing Modal
+
+
+const loadModalDetails = async id =>{
+    const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    showModalDetails(data.data);
+    console.log(data)
+  }
+  
+  const showModalDetails = news =>{
+    const modelTitle = document.getElementById('newsDetailModalLabel');
+    modelTitle.innerText = phone.name;
+  
+    const newsDetails = document.getElementById('news-details');
+    newsDetails.innerHTML = `
+    
+    <img src="${news.image_url}">
+    <p>Relase Date: ${news.releaseDate ? news.releaseDate : 'No Release Date Found'}</p>
+    
+    
+    `
+  
+  }
 
 // loadNewsDetails();
 
