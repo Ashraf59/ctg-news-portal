@@ -34,6 +34,7 @@ const displayNewsFeed = newsFeed => {
     // console.log(newsFeed)
     document.getElementById('loader').style.display = 'none'
     const textField = document.getElementById('text-field')
+    textField.value = ("Number of news is", + newsFeed.length);
 
     if (newsFeed.length != 0) {
         textField.innerHTML = `
@@ -45,7 +46,7 @@ const displayNewsFeed = newsFeed => {
         textField.innerText = 'There is No news'
 
     }
-
+    
     const newsContainer = document.getElementById('news-container')
     newsContainer.innerHTML = "";
     newsFeed.forEach(news => {
