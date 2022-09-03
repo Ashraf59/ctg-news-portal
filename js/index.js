@@ -1,5 +1,6 @@
 
-document.getElementById('loader').style.display = 'none'
+document.getElementById('loader').style.display = 'none';
+// Categories Link Added
 const loadNewsCategory = () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
     fetch(url)
@@ -51,7 +52,7 @@ const displayNewsFeed = newsFeed => {
         // console.log(news)
         const { title, details, total_view, thumbnail_url, image_url, author, _id } = news;
         const newsDiv = document.createElement('div')
-        //newsDiv.classList.add('imgs')
+        
         newsDiv.innerHTML = `
         <div class="d-flex my-4 shadow p-3 mb-5 bg-body rounded">
             <div class="col-md-4">
@@ -62,7 +63,7 @@ const displayNewsFeed = newsFeed => {
                     <h5 class="card-title mt-3 mb-2"> ${title}</h5>
                     <p class="card-text text-justify">${details.slice(0, 300) === true ? details.slice(0, 300) : details.slice(0, 301) + " ..."}</p>
                     <div class="d-flex justify-content-around  mt-5">
-                        <div><img src="${thumbnail_url}" class="img-fluid w-25 h-25 rounded-circle" alt="..."> </div>
+                        <div><img src="${thumbnail_url}" class="img-fluid img-design" alt="..."> </div>
                         <div>${total_view ? total_view : 'No views'}</div>
                         <div class="me-4"><button class="btn btn-outline-primary"  onclick="loadModalDetails('${_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">details</button></div>
                     </div>
@@ -78,7 +79,7 @@ const displayNewsFeed = newsFeed => {
 
 
 const loadModalDetails = (authorBioId) => {
-    // console.log(authorId)
+    // console.log(authorBioId)
     const url =  `https://openapi.programming-hero.com/api/news/${authorBioId}`
     fetch(url)
         .then(res => res.json())
@@ -89,7 +90,6 @@ const displayModal = authorsBio => {
     authorsBio.forEach(authorData => {
         const { details, author } = authorData;
         const { name, img } = author;
-        // modalBody.classList.add('card')
         modalDetail.innerHTML = `
             <img src="${img}" class="card-img-top modal-design" alt="...">
             <div class="card-body">
@@ -99,6 +99,6 @@ const displayModal = authorsBio => {
         `;
     })
 }
-// loadNewsDetails();
+
 
 loadNewsCategory();
