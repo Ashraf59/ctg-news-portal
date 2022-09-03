@@ -49,7 +49,7 @@ const displayNewsFeed = newsFeed => {
                     <div class="d-flex justify-content-around  mt-5">
                         <div><img src="${thumbnail_url}" class="img-fluid w-25 h-25 rounded-circle" alt="..."> </div>
                         <div>${total_view ? total_view : 'No views'}</div>
-                        <div><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal" onclick="loadModalDetails('${_id}')">Details</button></div>
+                        <div class="me-4"><button class="btn btn-outline-primary"  onclick="loadModalDetails('${_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">details</button></div>
                     </div>
                 </div>
             </div>
@@ -62,33 +62,28 @@ const displayNewsFeed = newsFeed => {
 //showing Modal
 
 
-const loadModalDetails = async id =>{
-    const url = `https://openapi.programming-hero.com/api/news/${id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    showModalDetails(data.data);
-    // console.log(data)
-  }
-  
-  const showModalDetails = showModal =>{
-    // const modelTitle = document.getElementById('newsDetailModalLabel');
-    // modelTitle.innerText = modal.name;
-  
-    const modalDetails = document.getElementById('modal-details');
-
-    showModal.forEach = (newsModal =>{
-        const {title, details, image_url} = newsModal;
-        console.log(title);
-    // const modalDiv = document.createElement('div')
-
-    modalDetails.innerHTML = `
-    <img src="${image_url}">
-    <h5 class="card-title mt-3 mb-2">Ashraf ${title}</h5>
-    `;
-        // modalDetails.appendChild(modalDiv)
+const loadModalDetails = (authorBioId) => {
+    // console.log(authorId)
+    const url =  `https://openapi.programming-hero.com/api/news/${authorBioId}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayModal(data.data))
+}
+const displayModal = authorsBio => {
+    const modalDetail = document.getElementById('modal-detail')
+    authorsBio.forEach(authorData => {
+        const { details, author } = authorData;
+        const { name, img } = author;
+        // modalBody.classList.add('card')
+        modalDetail.innerHTML = `
+            <img src="${img}" class="card-img-top modal-design" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${name ? name : 'no name found'}</h5>
+                <p class="card-text">${details.slice(0, 100)}</p>
+            </div>
+        `;
     })
-  }
-
+}
 // loadNewsDetails();
 
 loadNewsCategory();
