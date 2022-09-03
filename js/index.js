@@ -27,14 +27,14 @@ const loadCategoryDetails = async(category_id) => {
 }
 
 const displayNewsFeed = newsFeed => {
-    console.log(newsFeed)
+    // console.log(newsFeed)
     const textField = document.getElementById('text-field')
     textField.value = ("Number of news is", + newsFeed.length);
     const newsContainer = document.getElementById('news-container')
     newsContainer.innerHTML = "";
     newsFeed.forEach(news => {
-        console.log(news)
-        const { title, details, total_view, thumbnail_url, image_url, author } = news;
+        // console.log(news)
+        const { title, details, total_view, thumbnail_url, image_url, author, _id } = news;
         const newsDiv = document.createElement('div')
         //newsDiv.classList.add('imgs')
         newsDiv.innerHTML = `
@@ -49,7 +49,7 @@ const displayNewsFeed = newsFeed => {
                     <div class="d-flex justify-content-around  mt-5">
                         <div><img src="${thumbnail_url}" class="img-fluid w-25 h-25 rounded-circle" alt="..."> </div>
                         <div>${total_view ? total_view : 'No views'}</div>
-                        <div><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Details</button></div>
+                        <div><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal" onclick="loadModalDetails('${_id}')">Details</button></div>
                     </div>
                 </div>
             </div>
@@ -63,26 +63,30 @@ const displayNewsFeed = newsFeed => {
 
 
 const loadModalDetails = async id =>{
-    const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+    const url = `https://openapi.programming-hero.com/api/news/${id}`;
     const res = await fetch(url);
     const data = await res.json();
     showModalDetails(data.data);
-    console.log(data)
+    // console.log(data)
   }
   
-  const showModalDetails = news =>{
-    const modelTitle = document.getElementById('newsDetailModalLabel');
-    modelTitle.innerText = phone.name;
+  const showModalDetails = showModal =>{
+    // const modelTitle = document.getElementById('newsDetailModalLabel');
+    // modelTitle.innerText = modal.name;
   
-    const newsDetails = document.getElementById('news-details');
-    newsDetails.innerHTML = `
-    
-    <img src="${news.image_url}">
-    <p>Relase Date: ${news.releaseDate ? news.releaseDate : 'No Release Date Found'}</p>
-    
-    
-    `
-  
+    const modalDetails = document.getElementById('modal-details');
+
+    showModal.forEach = (newsModal =>{
+        const {title, details, image_url} = newsModal;
+        console.log(title);
+    // const modalDiv = document.createElement('div')
+
+    modalDetails.innerHTML = `
+    <img src="${image_url}">
+    <h5 class="card-title mt-3 mb-2">Ashraf ${title}</h5>
+    `;
+        // modalDetails.appendChild(modalDiv)
+    })
   }
 
 // loadNewsDetails();
