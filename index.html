@@ -48,18 +48,44 @@
     <main class="container">
 
       <!-- Category Section Start -->
-        <section>
-            <div id="news-category" class="container d-flex justify-content-evenly">
+        <!-- <section>
+            <div id="news-category" class="container d-flex justify-content-evenly col-sm-12">
 
             </div>
-        </section>
+        </section> -->
+
+
+        <section>
+          <nav class="navbar navbar-expand-lg mt-5">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          <a id="news-category" class=" nav-link active bolder fs-4 text-primary d-md-flex"
+                              aria-current="page">
+
+                          </a>
+                      </li>
+                  </ul>
+
+              </div>
+              </div>
+          </nav>
+
+      </section>
         <!-- Category Section End -->
 
         <!-- Input Section Start -->
 
         <section class="mt-4">
           <div>
-              <input type="text" id="text-field" class="border border-0 rounded-4 text-center shadow-md w-50 py-3">
+            <p id="text-field" class="rounded text-center align-items-center justify-content-center rounded-2 shadow-lg w-50 py-2 px-5 ">
+
+            </p>
           </div>
       </section>
       <!-- Input Section End -->
@@ -67,19 +93,6 @@
       <!-- Todays Pic and Trending Button Start -->
 
         <section class="mt-3">
-          
-          <div class="mt-5 d-flex justify-content-between">
-              <div><label class="fs-4 p-1">sort by : </label> <input class="ms-2 fs-5" type="text"
-                      placeholder="default"></div>
-              <div>
-                  <button class="btn btn-primary text-white me-3">todays Pic's</button>
-                  <button class="btn btn-primary text-white">trending</button>
-              </div>
-          </div>
-
-                <!-- Todays Pic and Trending Button End -->
-
-
             <!-- Loader started -->
             <div class="d-flex justify-content-center ">
               <div id="loader" class="spinner-border" role="status">
@@ -90,27 +103,28 @@
 
       </section>
         <!-- Modal Section Started -->
-      <section>
-        
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div id="modal-detail" class="modal-body">
+        <section>
+          <!-------
+                     Modal sction started------------>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="modal-body" class="modal-body">
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Modal Section End -->
+        </section>
+      <!-- modal section End  -->
 
         <!-- News Card section Started -->
 

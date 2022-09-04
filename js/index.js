@@ -14,7 +14,7 @@ const displayCategory = categories =>{
             // console.log(category);
             const categoryDiv = document.createElement('div');
             categoryDiv.innerHTML = `
-            <button href="#" class="btn btn-outline-primary" onclick="loadCategoryDetails('${category.category_id}')">${category.category_name}</button>
+            <button href="#" class="btn btn-outline-primary ms-3 fs-5" onclick="loadCategoryDetails('${category.category_id}')">${category.category_name}</button>
         `;
 
             newsCategory.appendChild(categoryDiv)
@@ -52,21 +52,26 @@ const displayNewsFeed = newsFeed => {
     newsFeed.forEach(news => {
         // console.log(news)
         const { title, details, total_view, thumbnail_url, image_url, author, _id } = news;
+        const {name, published_date, img} = author;
         const newsDiv = document.createElement('div')
         
         newsDiv.innerHTML = `
-        <div class="d-flex my-4 shadow p-3 mb-5 bg-body rounded">
-            <div class="col-md-4">
-            <img src="${image_url}" class="img-fluid rounded-start h-100" alt="...">
-            </div>
-            <div class="col-md-8 ms-3">
-                <div class="card-body">
-                    <h5 class="card-title mt-3 mb-2"> ${title}</h5>
-                    <p class="card-text text-justify">${details.slice(0, 300) === true ? details.slice(0, 300) : details.slice(0, 301) + " ..."}</p>
-                    <div class="d-flex justify-content-around  mt-5">
-                        <div><img src="${thumbnail_url}" class="img-fluid img-design" alt="..."> </div>
-                        <div>${total_view ? total_view : 'No views'}</div>
-                        <div class="me-4"><button class="btn btn-outline-primary"  onclick="loadModalDetails('${_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">details</button></div>
+        <div class="col-md-12 col-sm-12 my-4 rounded rounded-2 shadow-lg">
+            <div class="d-lg-flex d-md-flex">
+                <div>
+                    <img src="${image_url}" class="img-fluid rounded-start h-100 m-sm-100" alt="...">
+                </div>
+                <div class="col-md-8 col-sm-12 ms-2 flex-md-row ">
+                    <div class="card-body">
+                        <h5 class="card-title mt-3 p-3"> ${title}</h5>
+                        <p class="card-text p-3">${details.slice(0, 300) === true ? details.slice(0, 300) : details.slice(0, 301) + " ..."}</p>
+                        <div class="d-flex justify-content-around align-items-center mt-5 mb-2">
+                            <div class="d-flex "><img src="${img}" class="img-design" alt="...">
+                                <p class="p-2">${name ? name : 'no name found'}</p> 
+                            </div>
+                            <div >${total_view}</div>
+                            <div class="me-4"><button class="btn btn-outline-primary"  onclick="loadModal('${_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">details</button></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,19 +84,20 @@ const displayNewsFeed = newsFeed => {
 //showing Modal
 
 
-const loadModalDetails = (authorBioId) => {
-    // console.log(authorBioId)
-    const url =  `https://openapi.programming-hero.com/api/news/${authorBioId}`
+const loadModal = (authorId) => {
+    // console.log(authorId)
+    const url = `https://openapi.programming-hero.com/api/news/${authorId}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayModal(data.data))
 }
-const displayModal = authorsBio => {
-    const modalDetail = document.getElementById('modal-detail')
-    authorsBio.forEach(authorData => {
+const displayModal = authors => {
+    const modalBody = document.getElementById('modal-body')
+    authors.forEach(authorData => {
         const { details, author } = authorData;
         const { name, img } = author;
-        modalDetail.innerHTML = `
+        // modalBody.classList.add('card')
+        modalBody.innerHTML = `
             <img src="${img}" class="card-img-top modal-design" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${name ? name : 'no name found'}</h5>
@@ -100,6 +106,5 @@ const displayModal = authorsBio => {
         `;
     })
 }
-
 
 loadNewsCategory();
